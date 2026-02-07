@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>PredictionChain</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/ethers@5.7.2/dist/ethers.umd.min.js"></script>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="header">
+      <div>
+        <h1>PredictionChain</h1>
+        <p class="sub">Simple prediction market demo (Sepolia + MetaMask)</p>
+      </div>
+      <div class="net" id="netBadge">Network: </div>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2>Wallet</h2>
+
+        <div class="row">
+          <button class="btn" id="btnConnect">Connect MetaMask</button>
+          <button class="btn ghost" id="btnRefresh">Refresh</button>
+        </div>
+
+        <div class="kv">
+          <div class="k">Address</div><div class="v mono" id="addr">—</div>
+          <div class="k">ETH balance</div><div class="v mono" id="ethBal">—</div>
+          <div class="k">PRED balance (ERC-20)</div><div class="v mono" id="predBal">—</div>
+          <div class="status mono" id="status">Not connected</div>
+        </div>
+
+      </section>
+
+      <section class="card">
+        <h2>Contracts (placeholders)</h2>
+
+        <div class="kv">
+          <div class="k">PredictionMarket</div>
+          <div class="v mono" id="marketAddr">PASTE_LATER</div>
+
+          <div class="k">RewardToken (ERC-20)</div>
+          <div class="v mono" id="tokenAddr">PASTE_LATER</div>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Create Event</h2>
+
+        <label class="lbl">Title</label>
+        <input class="inp" id="evTitle" placeholder="Will GTA 6 release before 2027?" />
+
+        <div class="row2">
+          <div>
+            <label class="lbl">Deadline (unix timestamp)</label>
+            <input class="inp" id="evDeadline" placeholder="e.g. 1767225600" />
+          </div>
+          <div>
+            <label class="lbl">Options count</label>
+            <input class="inp" id="evOptions" placeholder="2" />
+          </div>
+        </div>
+
+        <button class="btn" id="btnCreate">Create</button>
+      </section>
+
+      <section class="card">
+        <h2>Place Bet</h2>
+
+        <div class="row2">
+          <div>
+            <label class="lbl">Event ID</label>
+            <input class="inp" id="betEventId" placeholder="0" />
+          </div>
+          <div>
+            <label class="lbl">Option index</label>
+            <input class="inp" id="betOption" placeholder="0" />
+          </div>
+        </div>
+
+        <label class="lbl">ETH amount</label>
+        <input class="inp" id="betAmount" placeholder="0.01" />
+
+        <button class="btn" id="btnBet">Bet</button>
+
+      </section>
+
+      <section class="card">
+        <h2>Finalize / Claim</h2>
+
+        <div class="row2">
+          <div>
+            <label class="lbl">Event ID</label>
+            <input class="inp" id="finEventId" placeholder="0" />
+          </div>
+          <div>
+            <label class="lbl">Winning option</label>
+            <input class="inp" id="finOption" placeholder="0" />
+          </div>
+        </div>
+
+        <div class="row">
+          <button class="btn danger" id="btnFinalize">Finalize (owner)</button>
+          <button class="btn ghost" id="btnClaim" >Claim (optional)</button>
+        </div>
+
+      </section>
+
+      <section class="card full">
+        <div class="headRow">
+          <h2>Events</h2>
+          <button class="btn ghost" id="btnLoad">Load last events</button>
+        </div>
+
+        <div class="tableWrap">
+          <table class="tbl">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Deadline</th>
+                <th>Status</th>
+                <th>Total Pool (ETH)</th>
+              </tr>
+            </thead>
+            <tbody id="eventsBody">
+              <tr><td colspan="5" class="muted">No data yet</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card full">
+        <h2>Logs</h2>
+        <pre class="log mono" id="log">Ready.</pre>
+      </section>
+    </main>
+
+    <footer class="foot muted">
+      ASTANA IT UNIVERSITY
+    </footer>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
